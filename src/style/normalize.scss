@@ -1,0 +1,17 @@
+input {
+  border: none;
+  outline: none;
+  background: none;
+  min-width: 270px;
+  width: 100%;
+
+  &:focus {
+    border: none;
+  }
+}
+
+button {
+  outline: none;
+  border: none;
+
+}
