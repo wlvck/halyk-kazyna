@@ -4,7 +4,7 @@
     <div class="w-100 d-flex justify-content-center header py-3">
       <h3>{{ title }}</h3>
     </div>
-    <div class="settings" @click.prevent="$router.push({name: 'Settings'})">
+    <div class="settings" @click.prevent="store.openSettings=true">
       Настройки
     </div>
   </div>
@@ -12,19 +12,23 @@
 
 <script>
 import {useRouter} from "vue-router";
+import {useStore} from "@/store";
+
 export default {
   props: {
     title: {type: String, default: null},
     routeName: {type: String, default: 'Home'},
   },
   name: 'TheHeader',
-  setup(props){
+  setup(props) {
+    const store = useStore()
     const router = useRouter()
     const redirect = () => {
       router.push({name: props.routeName})
     }
     return {
-      redirect
+      redirect,
+      store
     }
   }
 }

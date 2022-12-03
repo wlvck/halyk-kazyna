@@ -11,6 +11,7 @@ export const state = {
     product_code: '',
     calcSum: '',
     wholeCalcSumObj: '',
+    openSettings: false,
     usd_exchange_rate: '',
     addEmail: '',
     documentsList: [],

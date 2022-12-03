@@ -78,7 +78,13 @@
         text="Продолжить оформление"
         @click="$router.push({name: 'ConfirmAgreement'})"/>
   </div>
-  <router-view></router-view>
+<!--  <router-view></router-view>-->
+  <transition
+      enter-active-class="animate__animated animate__slideInUp animate__faster"
+      leave-active-class="animate__animated animate__slideOutDown animate__faster"
+  >
+    <TheSettings v-if="store.openSettings"/>
+  </transition>
 </template>
 <script>
 import {computed, ref, watch} from 'vue'
@@ -86,9 +92,10 @@ import {useRoute} from 'vue-router'
 import {useStore} from "@/store/index.js";
 import {debounce} from "@/utils/handlers.js";
 import TheHeader from "@/components/TheHeader";
+import TheSettings from "@/pages/TheSettings";
 
 export default {
-  components: {TheHeader},
+  components: {TheHeader, TheSettings},
   setup() {
     const result = ref('2')
     const interval = ref('2')
