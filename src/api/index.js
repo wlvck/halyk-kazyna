@@ -2,7 +2,7 @@ import axios from 'axios';
 
 const token = localStorage.getItem('TOKEN')
 const http = axios.create({
-    baseURL: "https://products.halyklife.kz",
+    baseURL: process.env.VUE_APP_BASE_URL
 });
 http.interceptors.request.use((config) => {
     config.headers.Authorization = `${token}`

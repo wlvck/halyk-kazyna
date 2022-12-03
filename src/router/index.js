@@ -3,6 +3,7 @@ import {createRouter, createWebHistory} from 'vue-router';
 import TheHome from "@/pages/TheHome.vue"
 import ConfirmAgreement from "@/pages/ConfirmAgreement.vue"
 import PdfDocument from "@/pages/PdfDocument";
+import TheSettings from "@/pages/TheSettings";
 
 const routes = [
     {
@@ -16,7 +17,14 @@ const routes = [
     {
         path: '/kazyna',
         name: 'Home',
-        component: TheHome
+        component: TheHome,
+        children: [
+            {
+                path: 'settings',
+                name: 'Settings',
+                component: TheSettings
+            }
+        ]
     },
     {
         path: '/confirm-agreement',

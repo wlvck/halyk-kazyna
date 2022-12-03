@@ -4,6 +4,7 @@ import TheHeader from "@/components/TheHeader";
 import TheInput from "@/components/TheInput"
 import TheSlider from "@/components/TheSlider";
 import TheIcon from "@/components/Icons/TheIcon";
+import ToggleButton from "@/components/ToggleButton";
 
 export const components =[
     TheSlider,
@@ -12,4 +13,5 @@ export const components =[
     TheHeader,
     TheIcon,
     TheDocument,
+    ToggleButton,
 ]

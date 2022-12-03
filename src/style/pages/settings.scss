@@ -1,0 +1,183 @@
+.settings__page{
+
+  .wrapper {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+
+    background-color: rgba(0, 0, 0, 0.25);
+
+    /* потому что у слайдера под ним круглешок на 5 уровне */
+    z-index: 6;
+  }
+
+  .sheet {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 360px;
+    background: white;
+    z-index: 6;
+    border-radius: 16px 16px 0 0;
+    padding-bottom: 59px;
+  }
+
+  .header-block {
+    position: relative;
+    padding: 29px 0 14px;
+    box-sizing: border-box;
+    top: 0;
+    border-bottom: 1px solid #F3E8E8;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 20px;
+    text-align: center;
+    color: #000000;
+    z-index: 3;
+  }
+
+
+  .header-title {
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 19px;
+    text-align: center;
+
+    color: #000000;
+  }
+
+  .short-line {
+    position: absolute;
+    width: 31px;
+    height: 3px;
+    left: 50%;
+    -moz-transform: translateX(-50%);
+    -webkit-transform: translateX(-50%);
+    transform: translateX(-50%);
+    top: 17px;
+
+    background: #C4C4C4;
+    border-radius: 26px;
+  }
+
+  .close-round {
+    position: absolute;
+
+    width: 20px;
+    height: 20px;
+
+    background-position: center;
+    background-repeat: no-repeat;
+
+    right: 23px;
+    top: 24px;
+  }
+
+  .accept-button {
+    margin-right: 22px;
+    margin-left: 22px;
+
+    bottom: 42px;
+
+    height: 48px;
+    background-color: #2AA65C;
+    border-radius: 12px;
+
+    font-family: 'Manrope';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 15px;
+    line-height: 48px;
+    text-align: center;
+
+    color: #FFFFFF;
+
+    cursor: pointer;
+  }
+
+  .toggle-block-wrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 32px;
+    border-bottom: 0.5px solid #F4E6E6;
+  }
+
+  .toggle-description {
+    font-family: 'Manrope';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 14px;
+    color: #000000;
+  }
+
+  .toggle-wrapper {
+    height: 20px;
+    width: 36px;
+  }
+
+  .input {
+    width: 100%;
+    height: 100%;
+
+    box-sizing: border-box;
+
+    border: none;
+    border-radius: inherit;
+
+    padding: 16px;
+    padding-top: 33px;
+    padding-bottom: 12px;
+
+    font-family: 'Manrope';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 19px;
+
+    color: #000000;
+
+    background-color: #FFFFFF;
+  }
+
+  .input-text-wrapper {
+    position: relative;
+    height: 64px;
+
+    box-sizing: border-box;
+
+    margin-right: 22px;
+    margin-left: 22px;
+
+    border-radius: 12px;
+
+    background-color: #FFFFFF;
+    box-shadow: 0px 12px 16px rgba(0, 0, 0, 0.05);
+
+    overflow: hidden;
+  }
+
+  .input-label {
+
+    position: absolute;
+    left: 16px;
+    top: 11px;
+
+    font-family: 'Manrope';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 13px;
+    line-height: 18px;
+
+    /* identical to box height */
+
+    color: #99A3B3;
+  }
+}

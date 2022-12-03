@@ -4,6 +4,7 @@ import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue-3/dist/bootstrap-vue-3.css'
 import "./style/main.scss"
 import {components} from '@/components';
+import 'animate.css';
 import router from "@/router";
 import {store} from "@/store";
 const app = createApp(App)

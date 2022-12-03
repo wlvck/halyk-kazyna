@@ -6,8 +6,9 @@
           {{ inputTitle }}
         </div>
         <div class="input__value">
-          <input type="tel" :value="inputValue" :disabled="disabled"
+          <input v-if="!isLoading" type="tel" :value="inputValue" :disabled="disabled"
                  @input.prevent="$emit('inputHandler', $event.target.value)">
+          <slot v-else name="onLoading"></slot>
         </div>
       </div>
       <slot name="onTheRight"></slot>
@@ -17,15 +18,20 @@
 </template>
 
 <script>
+import {useStore} from  "@/store"
 export default {
   props: {
     inputTitle: {type: String, default: null},
     inputValue: {type: String, default: null},
     disabled: {type: Boolean, default: true},
+    isLoading: {type: Boolean, default: false},
   },
   name: 'TheInput',
   setup(){
-
+    const store = useStore()
+    return {
+      store
+    }
   }
 }
 </script>

@@ -1,13 +1,23 @@
 export const state = {
+    isLoading: false,
     access_token: '',
     countInDollars: true,
     phone: '',
     annualRate: '',
     dollarRate: '',
     prize: '',
+    userData: {},
     period: '',
     product_code: '',
     calcSum: '',
+    wholeCalcSumObj: '',
     usd_exchange_rate: '',
+    addEmail: '',
     documentsList: [],
+    loading: {
+        annualRate: false,
+        usdExchangeRate: false,
+        insuredSum: false,
+        userName: false,
+    },
 }

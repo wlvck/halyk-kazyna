@@ -1,8 +1,9 @@
 .page {
   min-height: 100vh;
   display: flex;
+  position: relative;
   flex-direction: column;
-  padding: 30px 16px;
+  padding: 7px 16px;
 
   &__content {
     flex: 1 1 auto;
@@ -47,11 +48,14 @@
 }
 
 .app__button {
+  position: fixed;
+  bottom: 30px;
+  left: 16px;
+  right: 16px;
   background: $green;
   text-align: center;
   padding: 14px 16px;
-  width: 100%;
-  box-shadow: 0px 0px 0px rgba(42, 166, 92, 0.4);
+  box-shadow: 0px 0px 0px rgba(42, 166, 92, 0.4) !important;
   border-radius: 12px;
   font-style: normal;
   font-weight: 600;
@@ -148,6 +152,12 @@ button {
   }
 }
 
+.input__value {
+  position: relative;
+  height: 25px;
+  transition: all 0.5s ease;
+}
+
 .dot {
   width: 24px;
   height: 24px;
@@ -187,6 +197,152 @@ button {
     font-size: 16px;
     line-height: 20px;
     color: #071222;
+  }
+}
+
+.userName-skeleton {
+  position: absolute;
+  border-radius: 4px;
+  width: 150px;
+  height: 20px;
+  background-color: #e2e5e7;
+  background-image: linear-gradient(90deg, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0));
+  background-size: 40px 100%;
+  background-repeat: no-repeat;
+  background-position: left -40px top 0;
+  animation: shine 1s ease infinite;
+}
+
+.annual-rate-skeleton,
+.dollar-rate-skeleton {
+  position: absolute;
+  border-radius: 4px;
+  top: 0px;
+  left: 0px;
+  width: 60px;
+  height: 20px;
+  background-color: #e2e5e7;
+  background-image: linear-gradient(90deg, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0));
+  background-size: 40px 100%;
+  background-repeat: no-repeat;
+  background-position: left -40px top 0;
+  animation: shine 1s ease infinite;
+}
+
+.arrow-left {
+  position: absolute;
+  left: -2px;
+  top: 50%;
+  transform: translateY(-50%)
+}
+
+.calc-sum-skeleton {
+  position: absolute;
+  border-radius: 4px;
+  top: 0;
+  left: 0;
+  width: 100px;
+  height: 20px;
+  background-color: #e2e5e7;
+  background-image: linear-gradient(90deg, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0));
+  background-size: 40px 100%;
+  background-repeat: no-repeat;
+  background-position: left -40px top 0;
+  animation: shine 1s ease infinite;
+}
+
+.settings {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  font-style: normal;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 18px;
+  text-align: center;
+  color: #000000;
+}
+
+.manager-credentials-skeleton {
+  position: absolute;
+  border-radius: 4px;
+  top: 35px;
+  left: 15px;
+  width: 80%;
+  height: 20px;
+  background-color: #e2e5e7;
+  background-image: linear-gradient(90deg, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0));
+  background-size: 40px 100%;
+  background-repeat: no-repeat;
+  background-position: left -40px top 0;
+  animation: shine 1s ease infinite;
+}
+
+.toggle__button {
+  .switch {
+    position: relative;
+    display: inline-block;
+    width: 36px;
+    height: 20px;
+  }
+
+  .switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+
+  .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+
+    &:before {
+      position: absolute;
+      content: "";
+      height: 16px;
+      width: 16px;
+      left: 2px;
+      top: 50%;
+      transform: translateY(-50%);
+      background-color: white;
+      -webkit-transition: .4s;
+      transition: .4s;
+    }
+  }
+
+  input:checked + .slider {
+    background-color: rgb(42, 166, 92);
+  }
+
+  input:focus + .slider {
+    box-shadow: 0 0 1px #2196F3;
+  }
+
+  input:checked + .slider:before {
+    left: 18px;
+  }
+
+  /* Rounded sliders */
+  .slider.round {
+    border-radius: 34px;
+  }
+
+  .slider.round:before {
+    border-radius: 50%;
+  }
+}
+
+@keyframes shine {
+  to {
+    background-position: right -40px top 0;
   }
 }
 
