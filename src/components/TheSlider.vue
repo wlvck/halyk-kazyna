@@ -1,11 +1,11 @@
 <template>
   <div>
-    <VueSlider v-model="interval" @change="onSliderChange()" :disabled="disabled"
-               :contained="true" tooltip="none" :dotSize="24" :min="1" :max="sliderMaxValue" :railStyle="railStyle"
-               :processStyle="processStyle" :adsorb="true">
+    <VueSlider v-model="store.intervalValue" :disabled="disabled"
+               tooltip="none" :dotSize="24" :min="2" :max="sliderMaxValue" :railStyle="railStyle"
+               :processStyle="processStyle">
       <template v-slot:dot>
         <div class="dot">
-          <icon icon-name="slider-arrow"/>
+          <the-icon icon-name="slider-arrow"/>
         </div>
       </template>
     </VueSlider>
@@ -14,12 +14,12 @@
 </template>
 
 <script>
-import {reactive, ref} from "vue";
+import {reactive} from "vue";
 import VueSlider from 'vue-slider-component'
 import 'vue-slider-component/theme/default.css'
+import {useStore} from "@/store";
 
 export default {
-  emits: ['interval'],
   name: 'TheSlider',
   components: {
     VueSlider
@@ -29,9 +29,8 @@ export default {
     sliderMaxValue: {type: Number, default: null},
     disabled: {type: Boolean, default: null}
   },
-  setup(props, {emit}) {
-    const interval = ref(2)
-
+  setup() {
+    const store = useStore()
     const railStyle = reactive({
           backgroundColor: '#E0E6EF'
         }
@@ -40,18 +39,10 @@ export default {
           backgroundColor: '#2AA65C',
         }
     )
-    const onSliderChange = () => {
-      emit('interval', interval.value)
-    }
     return {
       railStyle,
+      store,
       processStyle,
-      onSliderChange
-    }
-  },
-  data() {
-    return {
-      interval: '',
     }
   },
 }

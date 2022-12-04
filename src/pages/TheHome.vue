@@ -14,14 +14,14 @@
     </the-input>
     <the-input
         input-title="Срок действия, лет"
-        :input-value="interval">
+        :input-value="intervalValue">
       <template #onTheBottom>
         <the-slider
             :clientAge="clientAge"
             :sliderMaxValue="sliderMaxValue"
             :disabled="disableSlider"
             class="pt-4"
-            @interval="getIntervalValue($event)"/>
+        />
       </template>
     </the-input>
     <the-input
@@ -98,7 +98,7 @@ export default {
   components: {TheHeader, TheSettings},
   setup() {
     const result = ref('2')
-    const interval = ref('2')
+    const intervalValue = ref()
     const route = useRoute()
     const managerValue = ref('')
     const clientAge = ref(19)
@@ -113,18 +113,15 @@ export default {
     })
     const store = useStore()
 
-    const getIntervalValue = (intervalValue) => {
-      result.value = String(intervalValue)
-    }
-
-    watch(() => result.value,
+    watch(() => store.intervalValue,
         () => {
-          if (result.value === '1') {
-            interval.value = result.value + ' год';
-          } else if (result.value === '2' || result.value === '3' || result.value === '4') {
-            interval.value = result.value + ' года';
+          console.log(store.intervalValue, 'interval')
+          if (store.intervalValue === 1) {
+            intervalValue.value = store.intervalValue + ' год';
+          } else if (store.intervalValue === 2 || store.intervalValue === 3 || store.intervalValue === 4) {
+            intervalValue.value = store.intervalValue + ' года';
           } else {
-            interval.value = result.value + ' лет';
+            intervalValue.value = store.intervalValue + ' лет';
           }
         }, {immediate: true})
 
@@ -152,17 +149,9 @@ export default {
       store.prize = clearPrevFormatting.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
     }
     const calcSum = debounce(async function () {
-      if (interval.value && store.prize) {
-
-        // эта проверка должна быть здесь перед отправкой на сервер вместо restrictPeriod, потому что
-        // иначе нельзя ввести '10'
-        if (interval.value === '1' || interval.value === '0' || interval.value < 0) {
-          interval.value = '2'
-        }
-        store.period = interval.value
-
+      if (store.intervalValue && store.prize) {
+        store.period = String(store.intervalValue)
         let data;
-
         if (store.countInDollars) {
           data = {
             product_code: 1104,
@@ -176,7 +165,6 @@ export default {
             premium_sum_kzt: String(store.prize.replace(/\s/g, ''))
           };
         }
-
         disableInput.value = true;
         await store.calculateSum(data)
         disableInput.value = false;
@@ -193,13 +181,12 @@ export default {
     return {
       sliderMaxValue,
       clientAge,
-      interval,
+      intervalValue,
       disableSlider,
       calcSum,
       prizeFormatter,
       store,
       disableInput,
-      getIntervalValue,
       prizeHandler,
       getManagerName,
       searchManager,
