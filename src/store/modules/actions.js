@@ -42,7 +42,7 @@ export const actions = {
             }
         } catch (err) {
             console.log(err)
-        } finally{
+        } finally {
             this.loading.annualRate = this.loading.usdExchangeRate = this.loading.insuredSum = false
         }
     },
@@ -81,7 +81,16 @@ export const actions = {
             console.log(err)
         }
     },
-    setCountInDollars(value){
+    async getDollarRate() {
+        try {
+            const response = await api.getDollarRate()
+            let usd = response.find((el) => el.title === 'USD');
+            this.dollarRate = usd.description
+        } catch (err) {
+            console.log(err)
+        }
+    },
+    setCountInDollars(value) {
         console.log(value)
         this.countInDollars = value;
         if (this.annualRate) {

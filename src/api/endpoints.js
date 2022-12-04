@@ -13,7 +13,12 @@ class Api {
             data: data
         })
     }
-
+    async getDollarRate(){
+        return await this.request({
+            url: '/api/v1/exchanges',
+            method: 'get'
+        })
+    }
     async calculate(data) {
         return await this.request({
             method: 'post',

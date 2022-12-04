@@ -36,6 +36,9 @@
         </div>
       </template>
     </the-input>
+    <div v-if="moreThan25Thousand" class="base-description">Достигнут лимит 25 тысяч долларов. Чтобы разблокировать,
+      свяжитесь с call-центром по номеру 7111
+    </div>
     <the-input
         v-show="store.prize && store.period"
         input-title="Страховая сумма к выплате"
@@ -105,7 +108,7 @@
   </transition>
 </template>
 <script>
-import {computed, reactive, ref, watch} from 'vue'
+import {computed, ref, watch} from 'vue'
 import {useRoute} from 'vue-router'
 import {useStore} from "@/store/index.js";
 import {debounce} from "@/utils/handlers.js";
@@ -119,10 +122,7 @@ export default {
     const route = useRoute()
     const managerValue = ref('')
     const userEmail = ref()
-    const emailMessage = reactive({
-      invalid: 'Email должен быть валидным',
-      empty: 'Поле email не должно быть пустым'
-    })
+    const emailMessage = ref('Email должен быть валидным')
     const clientAge = ref(19)
     const disableSlider = ref(true)
     const disableInput = ref(false)
@@ -153,7 +153,8 @@ export default {
         await store.getUserData()
       }
     }
-    auth()
+    auth();
+    store.getDollarRate()
 
     const prizeFormatter = debounce(async function (value) {
       let clearPrevFormatting = value.replace(/\s/g, '');
@@ -205,6 +206,17 @@ export default {
     const getUserEmail = (value) => {
       userEmail.value = value
     }
+    const moreThan25Thousand = computed(() => {
+      let clearPrevFormatting = store.prize.replace(/\s/g, '');
+
+      if (store.countInDollars && clearPrevFormatting >= 25000) {
+        return true;
+      } else if (!store.countInDollars && clearPrevFormatting >= (store.dollarRate * 1000)) {
+        return true;
+      }
+
+      return false;
+    })
     return {
       sliderMaxValue,
       clientAge,
@@ -220,6 +232,7 @@ export default {
       getManagerName,
       searchManager,
       sliderValueChanged,
+      moreThan25Thousand,
     }
   }
 }
