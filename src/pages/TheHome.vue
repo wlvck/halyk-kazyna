@@ -29,7 +29,13 @@
         input-title="Страховая премия для оплаты"
         :input-value="store.prize"
         :disabled="disableInput || disableSlider"
-        @inputHandler="prizeFormatter($event); prizeHandler($event); calcSum()"/>
+        @inputHandler="prizeFormatter($event); prizeHandler($event); calcSum()">
+      <template #currencySign>
+        <div v-if="store.prize" class="input-dollar-sign">{{ store.prize }}
+          {{ store.countInDollars ? '$' : '₸' }}
+        </div>
+      </template>
+    </the-input>
     <the-input
         v-show="store.prize && store.period"
         input-title="Страховая сумма к выплате"

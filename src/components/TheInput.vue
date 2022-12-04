@@ -6,8 +6,11 @@
           {{ inputTitle }}
         </div>
         <div class="input__value">
-          <input v-if="!isLoading" type="tel" :value="inputValue" :disabled="disabled"
-                 @input.prevent="$emit('inputHandler', $event.target.value)">
+          <div  v-if="!isLoading" class="position-relative">
+            <input type="tel" :value="inputValue" :disabled="disabled"
+                   @input.prevent="$emit('inputHandler', $event.target.value)">
+            <slot name="currencySign"></slot>
+          </div>
           <slot v-else name="onLoading"></slot>
         </div>
       </div>
