@@ -12,13 +12,11 @@
     padding: 0 16px;
     box-sizing: border-box;
     background-color: #fff;
-    z-index: 3;
+    z-index: 6;
   }
   &__content {
     flex: 1 1 auto;
     padding: 0 16px;
-    height: 100vh;
-    overflow-y: scroll;
   }
 }
 
@@ -313,6 +311,7 @@ button {
 
   color: #424955;
 }
+
 .toggle__button {
   .switch {
     position: relative;

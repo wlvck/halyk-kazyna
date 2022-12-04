@@ -26,12 +26,13 @@
       </template>
     </the-input>
     <the-input
+        class="hideInputText"
         input-title="Страховая премия для оплаты"
         :input-value="store.prize"
         :disabled="disableInput || disableSlider"
         @inputHandler="prizeFormatter($event); prizeHandler($event); calcSum()">
       <template #currencySign>
-        <div v-if="store.prize" class="input-dollar-sign">{{ store.prize }}
+        <div v-if="store.prize" class="input-dollar-sign"><span style="color: transparent">{{ store.prize }}</span>
           {{ store.countInDollars ? '$' : '₸' }}
         </div>
       </template>
@@ -91,7 +92,6 @@
         class="base-description">
       {{ emailMessage }}
     </div>
-
   </div>
   <div class="page__footer">
     <the-button
