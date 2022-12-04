@@ -1,8 +1,15 @@
 <template>
   <div>
-    <VueSlider v-model="store.intervalValue" :disabled="disabled"
-               tooltip="none" :dotSize="24" :min="2" :max="sliderMaxValue" :railStyle="railStyle"
-               :processStyle="processStyle">
+    <VueSlider
+        v-model="store.intervalValue"
+        :disabled="disabled"
+        tooltip="none"
+        :dotSize="24"
+        :min="2" :max="sliderMaxValue"
+        :railStyle="railStyle"
+        :processStyle="processStyle"
+        @change="sliderValueChanged"
+    >
       <template v-slot:dot>
         <div class="dot">
           <the-icon icon-name="slider-arrow"/>
@@ -29,7 +36,10 @@ export default {
     sliderMaxValue: {type: Number, default: null},
     disabled: {type: Boolean, default: null}
   },
-  setup() {
+  emits: [
+      'sliderUsed'
+  ],
+  setup(props, {emit}) {
     const store = useStore()
     const railStyle = reactive({
           backgroundColor: '#E0E6EF'
@@ -39,10 +49,14 @@ export default {
           backgroundColor: '#2AA65C',
         }
     )
+    const sliderValueChanged = () => {
+      emit('sliderUsed')
+    }
     return {
       railStyle,
       store,
       processStyle,
+      sliderValueChanged,
     }
   },
 }

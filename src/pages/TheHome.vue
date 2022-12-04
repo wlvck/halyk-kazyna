@@ -21,6 +21,7 @@
             :sliderMaxValue="sliderMaxValue"
             :disabled="disableSlider"
             class="pt-4"
+            @sliderUsed="sliderValueChanged"
         />
       </template>
     </the-input>
@@ -79,6 +80,7 @@
         @click="$router.push({name: 'ConfirmAgreement'})"/>
   </div>
 <!--  <router-view></router-view>-->
+  <div v-if="store.openSettings" class="settings__overlay"></div>
   <transition
       enter-active-class="animate__animated animate__slideInUp animate__faster"
       leave-active-class="animate__animated animate__slideOutDown animate__faster"
@@ -97,7 +99,6 @@ import TheSettings from "@/pages/TheSettings";
 export default {
   components: {TheHeader, TheSettings},
   setup() {
-    const result = ref('2')
     const intervalValue = ref()
     const route = useRoute()
     const managerValue = ref('')
@@ -115,7 +116,6 @@ export default {
 
     watch(() => store.intervalValue,
         () => {
-          console.log(store.intervalValue, 'interval')
           if (store.intervalValue === 1) {
             intervalValue.value = store.intervalValue + ' год';
           } else if (store.intervalValue === 2 || store.intervalValue === 3 || store.intervalValue === 4) {
@@ -155,13 +155,13 @@ export default {
         if (store.countInDollars) {
           data = {
             product_code: 1104,
-            validity: Number(result.value),
+            validity: store.intervalValue,
             premium_sum_usd: String(store.prize.replace(/\s/g, ''))
           };
         } else {
           data = {
             product_code: 1104,
-            validity: Number(result.value),
+            validity: store.intervalValue,
             premium_sum_kzt: String(store.prize.replace(/\s/g, ''))
           };
         }
@@ -178,6 +178,9 @@ export default {
     const getManagerName = (value) => {
       managerValue.value = value
     }
+    const sliderValueChanged = () => {
+      calcSum()
+    }
     return {
       sliderMaxValue,
       clientAge,
@@ -190,6 +193,7 @@ export default {
       prizeHandler,
       getManagerName,
       searchManager,
+      sliderValueChanged,
     }
   }
 }
