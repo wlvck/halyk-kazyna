@@ -14,7 +14,7 @@ export const state = {
     intervalValue: 2,
     openSettings: false,
     usd_exchange_rate: '',
-    addEmail: '',
+    showEmailField: false,
     documentsList: [],
     loading: {
         annualRate: false,

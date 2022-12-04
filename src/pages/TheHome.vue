@@ -72,6 +72,17 @@
         </div>
       </template>
     </the-input>
+    <the-input
+        v-if="store.showEmailField"
+        input-title="Ваш email"
+        :disabled="false"
+        @inputHandler="getUserEmail"/>
+    <div
+        v-if="store.showEmailField"
+        class="base-description">
+      {{ emailMessage }}
+    </div>
+
   </div>
   <div class="page__footer">
     <the-button
@@ -79,7 +90,6 @@
         text="Продолжить оформление"
         @click="$router.push({name: 'ConfirmAgreement'})"/>
   </div>
-<!--  <router-view></router-view>-->
   <div v-if="store.openSettings" class="settings__overlay"></div>
   <transition
       enter-active-class="animate__animated animate__slideInUp animate__faster"
@@ -89,7 +99,7 @@
   </transition>
 </template>
 <script>
-import {computed, ref, watch} from 'vue'
+import {computed, reactive, ref, watch} from 'vue'
 import {useRoute} from 'vue-router'
 import {useStore} from "@/store/index.js";
 import {debounce} from "@/utils/handlers.js";
@@ -102,6 +112,11 @@ export default {
     const intervalValue = ref()
     const route = useRoute()
     const managerValue = ref('')
+    const userEmail = ref()
+    const emailMessage = reactive({
+      invalid: 'Email должен быть валидным',
+      empty: 'Поле email не должно быть пустым'
+    })
     const clientAge = ref(19)
     const disableSlider = ref(true)
     const disableInput = ref(false)
@@ -181,15 +196,20 @@ export default {
     const sliderValueChanged = () => {
       calcSum()
     }
+    const getUserEmail = (value) => {
+      userEmail.value = value
+    }
     return {
       sliderMaxValue,
       clientAge,
       intervalValue,
       disableSlider,
       calcSum,
+      getUserEmail,
       prizeFormatter,
       store,
       disableInput,
+      emailMessage,
       prizeHandler,
       getManagerName,
       searchManager,
